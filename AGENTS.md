@@ -21,15 +21,50 @@ This is a **configuration-only project** — it contains no application source c
 
 The user does **not** need to type anything special in Slack; you should treat every @Cursor message as a task for this Manager-led flow. If the user explicitly says e.g. "Use agent-kit" or "Manager flow", that is a reminder to follow this; otherwise follow it by default for this repo.
 
-**Video artifacts and Slack:** When you produce a **video** artifact (e.g. screen recording saved to `/opt/cursor/artifacts/` or similar), if you have access to a **tool that uploads or posts a file to the current Slack thread** (e.g. via Slack MCP or Cursor), **use it** to post that video file to the thread so the user sees the video in the conversation. If no such tool is available, say where the video is (artifacts viewer, “Open in Web”) as you do today. Setup: `mcp-slack-upload/README.md`.
+## Video artifacts and Slack upload
 
-**Do not** try to send or embed the video in Slack using file paths (e.g. `/opt/cursor/artifacts/…`) or markdown like `![Video](path)` or `[filename](path)` — those paths are only valid on the agent side; the user will not see the video. **If you have the `upload_file_to_slack` tool** (slack-upload MCP): read the video file, base64-encode it, and call the tool with `filename`, `file_content_base64`, and (if known) `channel_id` and `thread_ts` to post the video into the thread. If you have no file-upload tool, use the reply format below.
+**When you produce a video artifact** (e.g. screen recording saved to `/opt/cursor/artifacts/`), you **must always upload it directly to Slack** using the Slack API. Do **not** rely on the `upload_file_to_slack` MCP tool (it may not be available) or artifact viewer links as the primary method.
 
-**When you cannot upload the video to Slack — reply format (keep it short and readable):**
-- One short sentence: what the video shows (e.g. "Screen recording of the Cursor docs homepage, ~20 seconds.").
-- **Direct link (required when possible):** If you have the current **run ID** (from run context, URL, or environment) and the **exact artifact filename** you saved (e.g. `cursor_docs_3sec_final.mp4`), you **must** include a clickable link so the user can open the video in one click. Format: `https://cursor.com/agents/{run_id}/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2F{filename}` — use the real run_id and filename (path is URL-encoded: `/` → `%2F`). Example: `https://cursor.com/agents/bc-3be85d63-569f-5468-b5f3-23758700b070/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2Fcursor_docs_homepage_demo.mp4`. If you do not have the run ID, say: **"To watch: click *Open in Web* in this message, then open the video file in the artifacts list."**
-- **If the video might not be there:** If you could not confirm the file was written (e.g. no success from the save step), add one line: "If you don't see the video in the artifacts viewer, the recording may have failed — ask me to try again."
-- Do **not** paste raw file paths. End with the agents-involved line.
+**Required workflow for Slack video upload:**
+
+1. **Get upload URL and file ID:**
+   ```bash
+   FILE_SIZE=$(stat -c%s "/opt/cursor/artifacts/your_video.mp4")
+   RESPONSE=$(curl -s -X POST https://slack.com/api/files.getUploadURLExternal \
+     -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+     -F "filename=your_video.mp4" \
+     -F "length=$FILE_SIZE")
+   ```
+   Extract `upload_url` and `file_id` from the JSON response using `python3 -m json.tool` or similar.
+
+2. **Upload the file to the URL:**
+   ```bash
+   curl -X POST "$UPLOAD_URL" -F "file=@/opt/cursor/artifacts/your_video.mp4"
+   ```
+   Should return `OK - <size>` with HTTP 200.
+
+3. **Complete upload and post to Slack:**
+   ```bash
+   curl -s -X POST https://slack.com/api/files.completeUploadExternal \
+     -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+     -H "Content-Type: application/json" \
+     -d "{\"files\":[{\"id\":\"$FILE_ID\",\"title\":\"Your Title\"}],\"channel_id\":\"$SLACK_DEFAULT_CHANNEL_ID\",\"initial_comment\":\"Your message (supports Hebrew and other languages)\"}"
+   ```
+   The video will appear directly in the Slack thread.
+
+**Environment variables available:**
+- `$SLACK_BOT_TOKEN` — Bot OAuth token for API authentication
+- `$SLACK_DEFAULT_CHANNEL_ID` — Target channel ID (from Cursor Secrets)
+
+**Important notes:**
+- Do **not** send file paths like `/opt/cursor/artifacts/…` in Slack messages (agent-side paths won't work for users)
+- Do **not** use markdown like `![Video](path)` or `[filename](path)` (Slack won't render these)
+- Always upload the video directly instead of providing artifact viewer links
+- The Slack API supports Unicode (Hebrew, emoji, etc.) in `initial_comment`
+
+**Only if API upload fails:** Fall back to artifact viewer: "To watch: click *Open in Web* in this message, then open `filename.mp4` in the artifacts list."
+
+For detailed workflow and troubleshooting, see: `agent-kit/skills/slack_video_upload.md`
 
 ## Project structure
 
@@ -38,17 +73,20 @@ The user does **not** need to type anything special in Slack; you should treat e
 | `agent-kit/roles/*.md` | 5 agent role definitions (manager, qa, browser, executor, researcher) |
 | `agent-kit/templates/*.md` | 4 templates (manager_plan, approval, handoff, task_intake) |
 | `agent-kit/prompts/slack_task.md` | Main prompt for Slack task processing |
+| `agent-kit/skills/*.md` | Skills and workflows (e.g. Slack video upload) |
 | `orchestrator/README.md` | Orchestrator description |
-| `.cursor/mcp.json` | MCP server config (Browser MCP via `npx`) |
+| `.cursor/mcp.json` | MCP server config (Browser MCP, Slack upload, etc.) |
+| `mcp-slack-upload/` | Slack upload MCP server (requires `npm install`) |
 | `runs/` | Directory for run artifacts |
 
 ## Cursor Cloud specific instructions
 
 - **No build, lint, or test commands exist.** There is no `package.json`, no build system, no test framework, and no linter configured.
-- **Node.js is required** only for the Browser MCP server (`npx -y @browsermcp/mcp@latest`), which is configured in `.cursor/mcp.json`. Cursor loads this automatically when the project is opened.
+- **Node.js is required** for MCP servers: Browser MCP (`npx -y @browsermcp/mcp@latest`) and Slack upload MCP (`node run-mcp-slack-upload.cjs`). Cursor loads these from `.cursor/mcp.json`.
 - **Browser MCP startup caveat:** The server logs a harmless `Failed to kill process on port 9009` error on first start (cleanup of a previous instance that doesn't exist). This can be ignored.
+- **Slack upload MCP setup:** The `mcp-slack-upload/` directory requires dependencies. On first use, run: `cd mcp-slack-upload && npm install`. Dependencies are already installed in the current environment.
 - **`GITHUB_TOKEN`** (PAT with `repo` scope for `raz-pixel-pivot/ai-agent-system`) is required for the Executor agent to create branches (prefixed `agent-exec/`) and open PRs. Set it via Cursor Secrets, not in project files.
-- **Slack integration** is required for task intake. Connect Cursor to Slack in Cursor Settings.
+- **Slack integration** is required for task intake. Environment variables `SLACK_BOT_TOKEN` and `SLACK_DEFAULT_CHANNEL_ID` are injected via Cursor Secrets.
 - When modifying agent roles or templates, verify changes by reviewing the Markdown directly — there are no automated validation tools in this repo.
 - The `runs/` directory is for runtime artifacts; it ships with only a `.gitkeep`.
 - To verify GitHub access works: `gh api repos/raz-pixel-pivot/ai-agent-system --jq '.permissions'`.

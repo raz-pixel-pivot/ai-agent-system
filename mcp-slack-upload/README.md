@@ -53,6 +53,16 @@ cd mcp-slack-upload && npm install
 | `thread_ts`         | No       | Parent message `ts` to post the file in that thread. |
 | `initial_comment`    | No       | Comment to post with the file. |
 
+## Current status
+
+**Dependencies:** ✅ Installed (as of 2026-02-25)
+
+**Preferred method:** Agents should use the **direct Slack API method** documented in `agent-kit/skills/slack_video_upload.md` rather than this MCP tool. The API method is more reliable and doesn't depend on MCP server availability.
+
 ## Agent instruction
 
-In **AGENTS.md** the agent is told: when you have a video artifact and you have the **`upload_file_to_slack`** tool, use it: read the file from the artifact path, base64‑encode it, and call the tool with `filename`, `file_content_base64`, and (if known) `channel_id` and `thread_ts` for the current Slack thread.
+**Primary method:** Use the Slack API directly (see `agent-kit/skills/slack_video_upload.md` for complete workflow).
+
+**Fallback (if MCP tool is available):** If you have the **`upload_file_to_slack`** tool loaded, you can use it: read the file from the artifact path, base64‑encode it, and call the tool with `filename`, `file_content_base64`, and (if known) `channel_id` and `thread_ts` for the current Slack thread.
+
+**Note:** The MCP tool may not be loaded in all sessions. Always prefer the direct API method for video uploads.
