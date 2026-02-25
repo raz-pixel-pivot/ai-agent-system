@@ -11,4 +11,6 @@ Task from Slack. Apply GLOBAL COST CONTROL.
 7. **Browser tasks** (e.g. "open URL", "go to About", "screenshot"): use role browser.md; one flow per task; if browser tool unavailable, offer Playwright script.
 8. Executor: only after APPROVED; branch agent-exec/<short>; minimal change; PR.
 
+**Every reply to the user must include** one line listing which agents the task passed through, e.g. `Agents involved: [MANAGER] → [BROWSER]` or `Agents involved: [MANAGER] → [RESEARCHER] → [QA]`. Use role tags in execution order. Place it at the end of the message (or after the main result) so the user always sees the flow.
+
 Max 6 steps unless approved. No raw logs or HTML dumps.

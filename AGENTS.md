@@ -17,6 +17,8 @@ This is a **configuration-only project** — it contains no application source c
 3. **Produce a plan** (manager_plan, max 10 lines), then ask for approval before any execution.
 4. **Delegate** to Researcher / QA / Executor / Browser only as per the plan and handoff template.
 
+**In every reply to the user (especially in Slack):** End with a single line stating which agents the task went through, e.g. `Agents involved: [MANAGER] → [BROWSER]` or `Task flow: Manager → Researcher → QA`. Use the role labels in order (left to right = first to last). This is required so the user sees which agents handled the task.
+
 The user does **not** need to type anything special in Slack; you should treat every @Cursor message as a task for this Manager-led flow. If the user explicitly says e.g. "Use agent-kit" or "Manager flow", that is a reminder to follow this; otherwise follow it by default for this repo.
 
 ## Project structure
