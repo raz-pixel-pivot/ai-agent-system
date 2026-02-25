@@ -43,7 +43,7 @@ Complete these steps in the **UI** (Cursor + Slack). The repo code already suppo
 - **Screenshots:** The agent can send them **inline** in the Slack thread; you see the image in the conversation.
 - **Videos:** Not shown inline. When the agent returns a video artifact, click **"Open in Web"** (or **"Open in Desktop"**) in that reply → opens the run at [cursor.com/agents](https://cursor.com/agents) where you can watch the video and see logs.
 
-Full details: [LIMITATIONS.md](LIMITATIONS.md#how-to-view-artifacts-today-per-cursor-docs).
+Full details: [LIMITATIONS.md](LIMITATIONS.md#how-to-view-artifacts-today-per-cursor-docs). To try getting video into the thread via Slack MCP: [SLACK_MCP_VIDEO.md](SLACK_MCP_VIDEO.md).
 
 ---
 

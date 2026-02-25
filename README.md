@@ -2,7 +2,7 @@
 
 **UI setup:** [docs/UI_CHECKLIST.md](docs/UI_CHECKLIST.md) – what to do in Cursor and Slack.
 
-**Screenshots & videos from Slack:** Screenshots can appear inline in the thread. Videos are not embedded in Slack — use **"Open in Web"** in the reply to open the run at [cursor.com/agents](https://cursor.com/agents) and watch the video there. Details: [docs/LIMITATIONS.md](docs/LIMITATIONS.md#how-to-view-artifacts-today-per-cursor-docs).
+**Screenshots & videos from Slack:** Screenshots can appear inline in the thread. Videos are not embedded in Slack — use **"Open in Web"** in the reply to open the run at [cursor.com/agents](https://cursor.com/agents) and watch the video there. To try getting video into the thread (Slack MCP): [docs/SLACK_MCP_VIDEO.md](docs/SLACK_MCP_VIDEO.md). Details: [docs/LIMITATIONS.md](docs/LIMITATIONS.md#how-to-view-artifacts-today-per-cursor-docs).
 
 ## Cloud Agents (Cursor)
 

@@ -21,6 +21,8 @@ This is a **configuration-only project** — it contains no application source c
 
 The user does **not** need to type anything special in Slack; you should treat every @Cursor message as a task for this Manager-led flow. If the user explicitly says e.g. "Use agent-kit" or "Manager flow", that is a reminder to follow this; otherwise follow it by default for this repo.
 
+**Video artifacts and Slack:** When you produce a **video** artifact (e.g. screen recording saved to `/opt/cursor/artifacts/` or similar), if you have access to a **tool that uploads or posts a file to the current Slack thread** (e.g. via Slack MCP or Cursor), **use it** to post that video file to the thread so the user sees the video in the conversation. If no such tool is available, say where the video is (artifacts viewer, “Open in Web”) as you do today. See `docs/SLACK_MCP_VIDEO.md` for setup.
+
 ## Project structure
 
 | Path | Purpose |
