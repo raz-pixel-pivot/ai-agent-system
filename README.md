@@ -1,8 +1,6 @@
 # AI Agent System
 
-**UI setup:** [docs/UI_CHECKLIST.md](docs/UI_CHECKLIST.md) – what to do in Cursor and Slack.
-
-**Screenshots & videos from Slack:** Screenshots can appear inline in the thread. Videos are not embedded in Slack — use **"Open in Web"** in the reply to open the run at [cursor.com/agents](https://cursor.com/agents) and watch the video there. To try getting video into the thread (Slack MCP): [docs/SLACK_MCP_VIDEO.md](docs/SLACK_MCP_VIDEO.md). Details: [docs/LIMITATIONS.md](docs/LIMITATIONS.md#how-to-view-artifacts-today-per-cursor-docs).
+**Screenshots & videos:** Screenshots can appear inline in Slack. For videos, use **"Open in Web"** in the reply → [cursor.com/agents](https://cursor.com/agents). To post video into the thread: set up **slack-upload** MCP — see [mcp-slack-upload/README.md](mcp-slack-upload/README.md) and [docs/MCP_SERVERS.md](docs/MCP_SERVERS.md).
 
 ## Cloud Agents (Cursor)
 
@@ -23,6 +21,3 @@
 
 If you see "Open a Git repository" / "Background agents only work in folders with a git repository" – the opened folder is not the one with `.git`. Reopen **AI Agent system** (or the `.code-workspace` file).
 
-**GitHub Access Error?** See [.cursor/GITHUB_ACCESS.md](.cursor/GITHUB_ACCESS.md).
-
-**Full list of updates:** [docs/UPDATES.md](docs/UPDATES.md).

@@ -6,7 +6,15 @@
     },
     "slack-upload": {
       "command": "node",
-      "args": ["mcp-slack-upload/index.js"]
+      "args": ["run-mcp-slack-upload.cjs"]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
     }
   }
 }

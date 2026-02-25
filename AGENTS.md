@@ -21,7 +21,7 @@ This is a **configuration-only project** — it contains no application source c
 
 The user does **not** need to type anything special in Slack; you should treat every @Cursor message as a task for this Manager-led flow. If the user explicitly says e.g. "Use agent-kit" or "Manager flow", that is a reminder to follow this; otherwise follow it by default for this repo.
 
-**Video artifacts and Slack:** When you produce a **video** artifact (e.g. screen recording saved to `/opt/cursor/artifacts/` or similar), if you have access to a **tool that uploads or posts a file to the current Slack thread** (e.g. via Slack MCP or Cursor), **use it** to post that video file to the thread so the user sees the video in the conversation. If no such tool is available, say where the video is (artifacts viewer, “Open in Web”) as you do today. See `docs/SLACK_MCP_VIDEO.md` for setup.
+**Video artifacts and Slack:** When you produce a **video** artifact (e.g. screen recording saved to `/opt/cursor/artifacts/` or similar), if you have access to a **tool that uploads or posts a file to the current Slack thread** (e.g. via Slack MCP or Cursor), **use it** to post that video file to the thread so the user sees the video in the conversation. If no such tool is available, say where the video is (artifacts viewer, “Open in Web”) as you do today. Setup: `mcp-slack-upload/README.md`.
 
 **Do not** try to send or embed the video in Slack using file paths (e.g. `/opt/cursor/artifacts/…`) or markdown like `![Video](path)` or `[filename](path)` — those paths are only valid on the agent side; the user will not see the video. **If you have the `upload_file_to_slack` tool** (slack-upload MCP): read the video file, base64-encode it, and call the tool with `filename`, `file_content_base64`, and (if known) `channel_id` and `thread_ts` to post the video into the thread. If you have no file-upload tool, give the filename and tell the user to click **"Open in Web"** to watch it in the run's artifacts viewer.
 
@@ -42,7 +42,7 @@ The user does **not** need to type anything special in Slack; you should treat e
 - **Node.js is required** only for the Browser MCP server (`npx -y @browsermcp/mcp@latest`), which is configured in `.cursor/mcp.json`. Cursor loads this automatically when the project is opened.
 - **Browser MCP startup caveat:** The server logs a harmless `Failed to kill process on port 9009` error on first start (cleanup of a previous instance that doesn't exist). This can be ignored.
 - **`GITHUB_TOKEN`** (PAT with `repo` scope for `raz-pixel-pivot/ai-agent-system`) is required for the Executor agent to create branches (prefixed `agent-exec/`) and open PRs. Set it via Cursor Secrets, not in project files.
-- **Slack integration** is required for task intake. See `docs/UI_CHECKLIST.md` for Cursor + Slack setup steps.
+- **Slack integration** is required for task intake. Connect Cursor to Slack in Cursor Settings.
 - When modifying agent roles or templates, verify changes by reviewing the Markdown directly — there are no automated validation tools in this repo.
 - The `runs/` directory is for runtime artifacts; it ships with only a `.gitkeep`.
 - To verify GitHub access works: `gh api repos/raz-pixel-pivot/ai-agent-system --jq '.permissions'`.
