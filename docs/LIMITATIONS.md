@@ -59,10 +59,12 @@ This allows users to:
 ## How to view artifacts today (per Cursor docs)
 
 - **Screenshots:** The agent can send them **inline in the Slack thread**; you see the image directly in the conversation.
-- **Videos:** Not shown inline in Slack. When the agent says *"Video Artifact: filename.mp4"*, you only see the filename and repo/branch in the thread. To **watch the video**:
+- **Videos:** Not shown inline in Slack or in chat. When the agent says *"Video Artifact: filename.mp4"*, you only see the filename and repo/branch in the thread. To **watch the video**:
   1. In that same Slack message, click **"Open in Web"** (or **"Open in Desktop"**).
   2. That opens the **run** at [cursor.com/agents](https://cursor.com/agents) (or in the Cursor app).
-  3. In the run view, open the **video** (and any screenshots/logs) to review the agent’s execution.
+  3. In the run, open the **artifacts viewer** for that Cloud Agent run — the video is there and playable. The agent cannot embed videos directly in chat; that is a **Cursor product design choice**: video artifact files are shown in the artifacts viewer for the run, not embedded in chat messages.
+
+**Why the agent says it "can't control" this:** The agent records and uploads the video correctly; it does **not** control how the Cursor UI displays it (inline vs artifacts viewer). That behavior is fixed by the Cursor Cloud Agent system.
 
 **References:** [Cloud agents (computer use)](https://cursor.com/blog/agent-computer-use), [Cloud Agents (web and mobile)](https://cursor.com/docs/cloud-agent/web-and-mobile), [Changelog (Feb 24, 2026)](https://cursor.com/changelog/02-24-26).
 
@@ -71,4 +73,4 @@ This allows users to:
 ## Workarounds (current)
 
 - **Screenshots:** Now sent inline in the Slack conversation; no workaround needed.
-- **Videos:** Not inline in Slack. Use **"Open in Web"** (or **"Open in Desktop"**) in the Slack reply to open the run and watch the video at [cursor.com/agents](https://cursor.com/agents).
+- **Videos:** Not inline in Slack or chat. The video is in the **artifacts viewer** for the run. Use **"Open in Web"** in the Slack reply → open the run at [cursor.com/agents](https://cursor.com/agents) → open the run’s artifacts viewer to watch the video. This is how Cursor is designed; the agent cannot embed videos in chat.
