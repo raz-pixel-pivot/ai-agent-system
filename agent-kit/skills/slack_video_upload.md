@@ -86,9 +86,18 @@ OK - 1059914
 HTTP Status: 200
 ```
 
-#### 2.3 Complete upload and post to channel
+#### 2.3 Complete upload and post to channel (or thread)
+
+**For posting to a thread:** Add the `thread_ts` parameter to post the video as a reply in a thread instead of a top-level message.
 
 ```bash
+# If posting to a thread, check for SLACK_THREAD_TS environment variable:
+if [ -n "$SLACK_THREAD_TS" ]; then
+  THREAD_PARAM=",\"thread_ts\":\"$SLACK_THREAD_TS\""
+else
+  THREAD_PARAM=""
+fi
+
 curl -s -X POST https://slack.com/api/files.completeUploadExternal \
   -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
   -H "Content-Type: application/json" \
@@ -101,8 +110,11 @@ curl -s -X POST https://slack.com/api/files.completeUploadExternal \
     ],
     \"channel_id\": \"$SLACK_DEFAULT_CHANNEL_ID\",
     \"initial_comment\": \"Your message here (supports Hebrew, emoji, etc.)\"
+    $THREAD_PARAM
   }" | python3 -m json.tool
 ```
+
+**Note:** The `$SLACK_THREAD_TS` environment variable should be set by Cursor when the agent is invoked from a Slack thread. If it's not available, the video will post to the channel as a top-level message.
 
 Expected response:
 ```json
@@ -177,8 +189,9 @@ cd /workspace/mcp-slack-upload && npm install
 |----------|-------------|---------|
 | `$SLACK_BOT_TOKEN` | Bot OAuth token (starts with `xoxb-`) | `xoxb-123-456-abc...` |
 | `$SLACK_DEFAULT_CHANNEL_ID` | Target Slack channel ID | `C01234567` |
+| `$SLACK_THREAD_TS` | Thread timestamp (if posting to a thread) | `1234567890.123456` |
 
-Both are injected via Cursor Secrets and are available in all cloud agent runs.
+The first two are injected via Cursor Secrets. `$SLACK_THREAD_TS` should be automatically set by Cursor when the agent is invoked from a Slack thread.
 
 ## Tips for better video uploads
 
