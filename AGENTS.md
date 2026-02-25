@@ -27,11 +27,9 @@ The user does **not** need to type anything special in Slack; you should treat e
 
 **When you cannot upload the video to Slack — reply format (keep it short and readable):**
 - One short sentence: what the video shows (e.g. "Screen recording of the Cursor docs homepage, ~20 seconds.").
-- **Prefer a direct link to the video:** If you have access to the current run ID and the artifact filename (e.g. from the run context or the path where you saved the file), include a clickable link in this form so the user can open the video in the browser in one click:
-  `https://cursor.com/agents/{run_id}/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2F{filename}`
-  Use the actual run ID and filename; encode the path segment for the query (e.g. `cursor_docs_homepage_demo.mp4` → `cursor_docs_homepage_demo.mp4` in the path part). Example: `https://cursor.com/agents/bc-3be85d63-569f-5468-b5f3-23758700b070/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2Fcursor_docs_homepage_demo.mp4`
-- If you do not have the run ID, say: **"To watch: click *Open in Web* in this message."**
-- Do **not** paste raw file paths or long technical text. End with the agents-involved line.
+- **Direct link (required when possible):** If you have the current **run ID** (from run context, URL, or environment) and the **exact artifact filename** you saved (e.g. `cursor_docs_3sec_final.mp4`), you **must** include a clickable link so the user can open the video in one click. Format: `https://cursor.com/agents/{run_id}/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2F{filename}` — use the real run_id and filename (path is URL-encoded: `/` → `%2F`). Example: `https://cursor.com/agents/bc-3be85d63-569f-5468-b5f3-23758700b070/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2Fcursor_docs_homepage_demo.mp4`. If you do not have the run ID, say: **"To watch: click *Open in Web* in this message, then open the video file in the artifacts list."**
+- **If the video might not be there:** If you could not confirm the file was written (e.g. no success from the save step), add one line: "If you don't see the video in the artifacts viewer, the recording may have failed — ask me to try again."
+- Do **not** paste raw file paths. End with the agents-involved line.
 
 ## Project structure
 
