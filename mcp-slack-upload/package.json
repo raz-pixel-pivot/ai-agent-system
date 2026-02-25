@@ -1,0 +1,23 @@
+{
+  "name": "mcp-slack-upload",
+  "version": "1.0.0",
+  "description": "MCP server to upload files (e.g. video artifacts) to a Slack channel or thread",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "mcp-slack-upload": "index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^4.3.6"
+  }
+}
