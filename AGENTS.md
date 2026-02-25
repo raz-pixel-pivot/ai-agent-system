@@ -8,14 +8,40 @@ This is a **configuration-only project** — it contains no application source c
 
 ## When you receive a task from Slack
 
-**Always use the Manager-led flow.** For every request that comes from Slack (or is a general task):
+**Choose the appropriate workflow based on task complexity:**
+
+### Fast-Path Workflow (Recommended for Simple Tasks)
+
+For **simple, single-action tasks** (video recording, screenshots, single searches, basic browser actions), use the **Fast-Path workflow** defined in `agent-kit/workflows/fast_path.md`:
+
+1. **Recognize** task type immediately
+2. **Execute** directly without Manager overhead
+3. **Report** completion with evidence
+
+**Performance:** 5-8 seconds for typical tasks vs. 15-20 seconds with Manager-led flow.
+
+**Examples of Fast-Path tasks:**
+- "Record a video and upload to Slack"
+- "Take a screenshot of example.com"
+- "Search for X and show first result"
+- "Navigate to URL and click button Y"
+
+### Manager-Led Workflow (For Complex Tasks)
+
+For **complex or multi-step tasks**, use the full Manager-led flow:
 
 1. **Act as Manager first.** Load and follow:
-   - `agent-kit/prompts/slack_task.md` — main flow (task intake, plan, approval, handoff).
-   - `agent-kit/roles/manager.md` — you never modify the repo; you plan, label outputs `[MANAGER]`, and delegate.
+ - `agent-kit/prompts/slack_task.md` — main flow (task intake, plan, approval, handoff).
+ - `agent-kit/roles/manager.md` — you never modify the repo; you plan, label outputs `[MANAGER]`, and delegate.
 2. **Parse the request** with the task_intake logic (goal, constraints, success in 1 line each).
 3. **Produce a plan** (manager_plan, max 10 lines), then ask for approval before any execution.
 4. **Delegate** to Researcher / QA / Executor / Browser only as per the plan and handoff template.
+
+**Examples of Manager-led tasks:**
+- "Research X and create a PR with improvements"
+- "Analyze the codebase and propose architecture changes"
+- "Test feature X across multiple scenarios"
+- Any task requiring code modifications
 
 **In every reply to the user (especially in Slack):** End with a single line stating which agents the task went through, e.g. `Agents involved: [MANAGER] → [BROWSER]` or `Task flow: Manager → Researcher → QA`. Use the role labels in order (left to right = first to last). This is required so the user sees which agents handled the task.
 
@@ -44,17 +70,25 @@ The user does **not** need to type anything special in Slack; you should treat e
    Should return `OK - <size>` with HTTP 200.
 
 3. **Complete upload and post to Slack:**
-   ```bash
-   curl -s -X POST https://slack.com/api/files.completeUploadExternal \
-     -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
-     -H "Content-Type: application/json" \
-     -d "{\"files\":[{\"id\":\"$FILE_ID\",\"title\":\"Your Title\"}],\"channel_id\":\"$SLACK_DEFAULT_CHANNEL_ID\",\"initial_comment\":\"Your message (supports Hebrew and other languages)\"}"
-   ```
-   The video will appear directly in the Slack thread.
+ ```bash
+ # Check if posting to a thread
+ if [ -n "$SLACK_THREAD_TS" ]; then
+   THREAD_PARAM=",\"thread_ts\":\"$SLACK_THREAD_TS\""
+ else
+   THREAD_PARAM=""
+ fi
+ 
+ curl -s -X POST https://slack.com/api/files.completeUploadExternal \
+ -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+ -H "Content-Type: application/json" \
+ -d "{\"files\":[{\"id\":\"$FILE_ID\",\"title\":\"Your Title\"}],\"channel_id\":\"$SLACK_DEFAULT_CHANNEL_ID\",\"initial_comment\":\"Your message (supports Hebrew and other languages)\"$THREAD_PARAM}"
+ ```
+ The video will appear in the Slack channel (or thread if `$SLACK_THREAD_TS` is set).
 
 **Environment variables available:**
 - `$SLACK_BOT_TOKEN` — Bot OAuth token for API authentication
 - `$SLACK_DEFAULT_CHANNEL_ID` — Target channel ID (from Cursor Secrets)
+- `$SLACK_THREAD_TS` — Thread timestamp (automatically set when invoked from a Slack thread)
 
 **Important notes:**
 - Do **not** send file paths like `/opt/cursor/artifacts/…` in Slack messages (agent-side paths won't work for users)
@@ -74,6 +108,7 @@ For detailed workflow and troubleshooting, see: `agent-kit/skills/slack_video_up
 | `agent-kit/templates/*.md` | 4 templates (manager_plan, approval, handoff, task_intake) |
 | `agent-kit/prompts/slack_task.md` | Main prompt for Slack task processing |
 | `agent-kit/skills/*.md` | Skills and workflows (e.g. Slack video upload) |
+| `agent-kit/workflows/*.md` | Workflow definitions (fast_path for simple tasks) |
 | `orchestrator/README.md` | Orchestrator description |
 | `.cursor/mcp.json` | MCP server config (Browser MCP, Slack upload, etc.) |
 | `mcp-slack-upload/` | Slack upload MCP server (requires `npm install`) |
