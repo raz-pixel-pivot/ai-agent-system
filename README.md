@@ -24,3 +24,5 @@
 If you see "Open a Git repository" / "Background agents only work in folders with a git repository" – the opened folder is not the one with `.git`. Reopen **AI Agent system** (or the `.code-workspace` file).
 
 **GitHub Access Error?** See [.cursor/GITHUB_ACCESS.md](.cursor/GITHUB_ACCESS.md).
+
+**Full list of updates:** [docs/UPDATES.md](docs/UPDATES.md).

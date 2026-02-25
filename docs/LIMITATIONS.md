@@ -66,6 +66,8 @@ This allows users to:
 
 **Why the agent says it "can't control" this:** The agent records and uploads the video correctly; it does **not** control how the Cursor UI displays it (inline vs artifacts viewer). That behavior is fixed by the Cursor Cloud Agent system.
 
+**Confirmed:** Sending the video in Slack using file paths (e.g. `/opt/cursor/artifacts/filename.mp4`) or markdown image/link syntax does **not** show the video in the chat; those paths are not accessible to the user. The correct behavior is to name the file and direct the user to **"Open in Web"** → artifacts viewer.
+
 **References:** [Cloud agents (computer use)](https://cursor.com/blog/agent-computer-use), [Cloud Agents (web and mobile)](https://cursor.com/docs/cloud-agent/web-and-mobile), [Changelog (Feb 24, 2026)](https://cursor.com/changelog/02-24-26).
 
 ---

@@ -23,6 +23,8 @@ The user does **not** need to type anything special in Slack; you should treat e
 
 **Video artifacts and Slack:** When you produce a **video** artifact (e.g. screen recording saved to `/opt/cursor/artifacts/` or similar), if you have access to a **tool that uploads or posts a file to the current Slack thread** (e.g. via Slack MCP or Cursor), **use it** to post that video file to the thread so the user sees the video in the conversation. If no such tool is available, say where the video is (artifacts viewer, “Open in Web”) as you do today. See `docs/SLACK_MCP_VIDEO.md` for setup.
 
+**Do not** try to send or embed the video in Slack using file paths (e.g. `/opt/cursor/artifacts/…`) or markdown like `![Video](path)` or `[filename](path)` — those paths are only valid on the agent side; the user will not see the video. If you have no file-upload-to-Slack tool, give the filename and tell the user to click **"Open in Web"** to watch it in the run's artifacts viewer.
+
 ## Project structure
 
 | Path | Purpose |

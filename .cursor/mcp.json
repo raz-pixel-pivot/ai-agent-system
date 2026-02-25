@@ -3,6 +3,10 @@
     "browsermcp": {
       "command": "npx",
       "args": ["-y", "@browsermcp/mcp@latest"]
+    },
+    "slack": {
+      "type": "streamableHttp",
+      "url": "https://mcp.slack.com/mcp"
     }
   }
 }

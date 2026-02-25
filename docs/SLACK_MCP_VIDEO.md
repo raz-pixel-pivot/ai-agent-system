@@ -8,10 +8,13 @@ When the agent records a video (e.g. screen recording), the video should appear 
 
 ## 1. Enable Slack MCP in Cursor
 
-1. Open **Cursor Settings** → **Tools & MCP**.
-2. Click **Add Custom MCP** / **New MCP Server**.
-3. If Cursor offers **Slack** as a built-in or partner integration, choose it and complete the **OAuth flow** (connect your Slack workspace). The official Slack MCP endpoint is `https://mcp.slack.com/mcp` and requires OAuth; Cursor as a [partner client](https://docs.slack.dev/ai/mcp-server) may provide this in the UI.
-4. If there is no built-in Slack MCP: you would need to run your own Slack app that connects to Slack’s MCP (see [Slack MCP server docs](https://docs.slack.dev/ai/mcp-server)) and expose it to Cursor; that is more advanced.
+**Slack MCP is already added in this project** (same place as Browser MCP): `.cursor/mcp.json` includes a `slack` entry with `type: "streamableHttp"` and `url: "https://mcp.slack.com/mcp"`.
+
+To use it:
+
+1. Open **Cursor Settings** → **Tools & MCP** (or **Features** → **MCP**). The **slack** server from the project should appear in the list.
+2. Complete the **OAuth flow** when Cursor prompts you (or use “Connect” / “Sign in with Slack”) so Cursor can talk to your Slack workspace. The official Slack MCP requires OAuth; Cursor as a [partner client](https://docs.slack.dev/ai/mcp-server) provides this in the UI.
+3. If Slack does not appear or connect: add it manually as a **Streamable HTTP** MCP with URL `https://mcp.slack.com/mcp`, then complete OAuth when asked.
 
 ## 2. What the agent is instructed to do
 
@@ -28,7 +31,7 @@ The official Slack MCP today focuses on **send message**, **read thread**, **sea
 
 | Step | Action |
 |------|--------|
-| 1 | Enable Slack MCP in Cursor (Settings → Tools & MCP) and connect Slack via OAuth if offered. |
+| 1 | Slack MCP is in `.cursor/mcp.json`. In Cursor (Settings → Tools & MCP) complete Slack OAuth so the server can connect. |
 | 2 | Agent already has the instruction to post video to the thread when a suitable tool is available. |
 | 3 | If no file-upload tool exists, keep using “Open in Web” and request the feature from Cursor/Slack. |
 
