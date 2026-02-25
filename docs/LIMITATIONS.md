@@ -6,23 +6,9 @@ This document tracks current limitations of the AI Agent System and features tha
 
 ### 1. Inline Screenshot Display
 
-**Current Behavior:**
-- When agents capture screenshots (e.g., via `computerUse` subagent), images are saved to `/opt/cursor/artifacts/`
-- File paths are shared in Slack responses (e.g., `pixel_and_pivot_about_page.webp`)
-- Users cannot view these images in Slack - the file links don't render as inline images
-- Users don't have access to view the artifact files from the Slack interface
-
-**Desired Behavior:**
-- Screenshots should be embedded/attached directly in Slack messages so they appear inline in the conversation
-- Users should be able to see the image immediately without needing to access external files or repositories
-
-**Technical Requirements:**
-- Slack MCP tool/integration that supports posting images to threads
-- Or: Artifact system that automatically shares images to Slack threads
-- Or: Modified Cloud Agent → Slack output relay that includes image attachments
-
-**Use Case:**
-When a user requests: "Open https://example.com and send me a screenshot," they should receive the screenshot image visible directly in the Slack thread.
+**Current Behavior (updated):**
+- **Screenshots:** The agent **can** now send the image inline in the Slack conversation; you can see the screenshot directly in the thread.
+- Images may also be saved to artifacts; the inline display in Slack is the main way to view them for screenshot-only tasks.
 
 ---
 
@@ -30,8 +16,8 @@ When a user requests: "Open https://example.com and send me a screenshot," they 
 
 **Current Behavior:**
 - Cloud agents **do** record their runs and produce **videos, screenshots, and logs** (see [Cursor blog](https://cursor.com/blog/agent-computer-use)).
-- These artifacts are **viewable in the run view** at [cursor.com/agents](https://cursor.com/agents) (open via **"Open in Web"** from the Slack reply).
-- In Slack itself, users only get text + link to the run; the video/screenshot is **not** embedded in the thread.
+- **Screenshots** can be sent inline in the Slack thread (see §1 above).
+- **Videos** are **not** embedded in Slack; users get the filename and repo/branch only. To watch the video, open the run via **"Open in Web"** from the Slack reply → [cursor.com/agents](https://cursor.com/agents), where the video is playable.
 
 **Desired Behavior:**
 - Agents should record video/screen capture of their full task execution
@@ -72,25 +58,17 @@ This allows users to:
 
 ## How to view artifacts today (per Cursor docs)
 
-Cursor Cloud Agents **do** produce **videos, screenshots, and logs** for runs. They are not shown inline in Slack, but they are viewable:
+- **Screenshots:** The agent can send them **inline in the Slack thread**; you see the image directly in the conversation.
+- **Videos:** Not shown inline in Slack. When the agent says *"Video Artifact: filename.mp4"*, you only see the filename and repo/branch in the thread. To **watch the video**:
+  1. In that same Slack message, click **"Open in Web"** (or **"Open in Desktop"**).
+  2. That opens the **run** at [cursor.com/agents](https://cursor.com/agents) (or in the Cursor app).
+  3. In the run view, open the **video** (and any screenshots/logs) to review the agent’s execution.
 
-1. **From the Slack reply:** When the agent finishes, the message includes **Repository** and **Branch** and buttons **"Open in Web"** and **"Open in Desktop"**.
-2. **Click "Open in Web"** (or "Open in Desktop") → this opens the **run** at [cursor.com/agents](https://cursor.com/agents) (or in the Cursor app).
-3. **In the run view** you can see the agent’s artifacts: **videos** (session recording of the agent’s actions), **screenshots**, and **logs**. Use this to review how the task was executed and to see the captured screenshot.
-
-**References:**
-- [Cloud agents (computer use)](https://cursor.com/blog/agent-computer-use): agents produce merge-ready PRs with artifacts (videos, screenshots, logs); you can also control the agent’s remote desktop.
-- [Cloud Agents (web and mobile)](https://cursor.com/docs/cloud-agent/web-and-mobile): start agents from Slack; “receiving notifications” includes a link to the run.
-- [Changelog (Feb 24, 2026)](https://cursor.com/changelog/02-24-26): “Cloud agents produce merge-ready PRs with artifacts (videos, screenshots, and logs) that make it possible to quickly review their changes.”
-
-So: **screenshots and session-style videos exist**; open the run via **"Open in Web"** from the Slack message to view them.
-
-**Important:** When the agent replies with something like *"Video Artifact: pixelnpivot_about_page_navigation.mp4"* or *"Screenshot: pixel_and_pivot_about_page.webp"*, you **will not** see the video or image in the Slack thread — Slack only shows the filename and repo/branch. To actually watch the video or see the screenshot, use **"Open in Web"** (or **"Open in Desktop"**) in that same Slack message; that opens the run where the video and screenshots are playable/viewable.
+**References:** [Cloud agents (computer use)](https://cursor.com/blog/agent-computer-use), [Cloud Agents (web and mobile)](https://cursor.com/docs/cloud-agent/web-and-mobile), [Changelog (Feb 24, 2026)](https://cursor.com/changelog/02-24-26).
 
 ---
 
 ## Workarounds (current)
 
-- **Inline image in Slack:** Not available; images are not embedded in the Slack message.
-- **Session recording / video:** Available in the **run view** (cursor.com/agents or Desktop) after clicking **"Open in Web"** from the Slack reply; not posted inline in Slack.
-- Until Slack shows images/videos inline, use **Open in Web** to review artifacts.
+- **Screenshots:** Now sent inline in the Slack conversation; no workaround needed.
+- **Videos:** Not inline in Slack. Use **"Open in Web"** (or **"Open in Desktop"**) in the Slack reply to open the run and watch the video at [cursor.com/agents](https://cursor.com/agents).
