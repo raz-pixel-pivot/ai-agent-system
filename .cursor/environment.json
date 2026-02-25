@@ -1,0 +1,8 @@
+{
+  "description": "Expected env for Cloud Agents. Set values in Cursor Personal Configuration (GitHub Access); do not commit secrets.",
+  "variables": [
+    "GITHUB_TOKEN"
+  ],
+  "install": "npm install",
+  "start": "npm run dev"
+}

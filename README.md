@@ -1,22 +1,24 @@
 # AI Agent System
 
-**הגדרת ממשק (UI):** [docs/UI_CHECKLIST.md](docs/UI_CHECKLIST.md) – מה לעשות ב-Cursor וב-Slack.
+**UI setup:** [docs/UI_CHECKLIST.md](docs/UI_CHECKLIST.md) – what to do in Cursor and Slack.
 
 ## Cloud Agents (Cursor)
 
-**Cloud Agents דורשים תיקייה של גיט.** אם מופיע **GitHub Access Error** – הוראות תיקון: [.cursor/GITHUB_ACCESS.md](.cursor/GITHUB_ACCESS.md). – כלומר תיקייה שמכילה את התיקייה `.git` (ריפו גיט). בתיקייה הזו יש ריפו גיט.
+**Cloud Agents require a Git folder** (a directory that contains a `.git` repo). This folder is a Git repo.
 
-### איך לפתוח נכון (כדי ש־Cloud Agents יזהה):
+### How to open correctly (so Cloud Agents detect it)
 
-**אפשרות 1 – פתיחת קובץ ה־Workspace (מומלץ):**
-1. **File** → **Open File** או **Open**
-2. נווט ל־**Desktop** → **AI Agent system**
-3. בחר את הקובץ **`AI Agent system.code-workspace`** (לא תיקייה)
-4. אשר **Open** – Cursor יפתח את תיקיית הפרויקט כ־root, ו־Cloud Agents יזהה את הגיט
+**Option 1 – Open the workspace file (recommended):**
+1. **File** → **Open File** or **Open**
+2. Go to **Desktop** → **AI Agent system**
+3. Select the file **`AI Agent system.code-workspace`** (not the folder)
+4. Confirm **Open** – Cursor will open the project folder as root and Cloud Agents will detect Git
 
-**אפשרות 2 – פתיחת התיקייה:**
+**Option 2 – Open the folder:**
 1. **File** → **Open Folder**
-2. בחר **בדיוק** את התיקייה **AI Agent system** (זו שיש בה את הקבצים README.md ו־.git)
-3. **לא** לפתוח את תיקיית Desktop או תיקייה אחרת – רק את **AI Agent system**
+2. Select exactly the **AI Agent system** folder (the one that contains README.md and .git)
+3. Do **not** open the Desktop folder or another folder – only **AI Agent system**
 
-אם מופיע "Open a Git repository" / "Background agents only work in folders with a git repository" – סימן שהתיקייה שנפתחה אינה התיקייה שיש בה `.git`. פתח את **AI Agent system** (או את הקובץ `.code-workspace`) מחדש.
+If you see "Open a Git repository" / "Background agents only work in folders with a git repository" – the opened folder is not the one with `.git`. Reopen **AI Agent system** (or the `.code-workspace` file).
+
+**GitHub Access Error?** See [.cursor/GITHUB_ACCESS.md](.cursor/GITHUB_ACCESS.md).
