@@ -85,6 +85,8 @@ Cursor Cloud Agents **do** produce **videos, screenshots, and logs** for runs. T
 
 So: **screenshots and session-style videos exist**; open the run via **"Open in Web"** from the Slack message to view them.
 
+**Important:** When the agent replies with something like *"Video Artifact: pixelnpivot_about_page_navigation.mp4"* or *"Screenshot: pixel_and_pivot_about_page.webp"*, you **will not** see the video or image in the Slack thread — Slack only shows the filename and repo/branch. To actually watch the video or see the screenshot, use **"Open in Web"** (or **"Open in Desktop"**) in that same Slack message; that opens the run where the video and screenshots are playable/viewable.
+
 ---
 
 ## Workarounds (current)
