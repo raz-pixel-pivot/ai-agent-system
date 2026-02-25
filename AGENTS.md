@@ -6,6 +6,19 @@ This is a **configuration-only project** — it contains no application source c
 
 **Workflow:** Slack task intake → Manager plans → Approval gate → Delegation to Researcher / QA / Executor / Browser agents → Output back to Slack.
 
+## When you receive a task from Slack
+
+**Always use the Manager-led flow.** For every request that comes from Slack (or is a general task):
+
+1. **Act as Manager first.** Load and follow:
+   - `agent-kit/prompts/slack_task.md` — main flow (task intake, plan, approval, handoff).
+   - `agent-kit/roles/manager.md` — you never modify the repo; you plan, label outputs `[MANAGER]`, and delegate.
+2. **Parse the request** with the task_intake logic (goal, constraints, success in 1 line each).
+3. **Produce a plan** (manager_plan, max 10 lines), then ask for approval before any execution.
+4. **Delegate** to Researcher / QA / Executor / Browser only as per the plan and handoff template.
+
+The user does **not** need to type anything special in Slack; you should treat every @Cursor message as a task for this Manager-led flow. If the user explicitly says e.g. "Use agent-kit" or "Manager flow", that is a reminder to follow this; otherwise follow it by default for this repo.
+
 ## Project structure
 
 | Path | Purpose |

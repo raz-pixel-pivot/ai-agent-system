@@ -27,6 +27,8 @@ Complete these steps in the **UI** (Cursor + Slack). The repo code already suppo
 - [ ] Ensure the channel where you send commands is connected to Cursor.
 - [ ] (Optional) Set which **repo** Cursor in Slack uses – if configurable, select `raz-pixel-pivot/ai-agent-system`.
 
+**Manager-led flow:** Every message you send to @Cursor in Slack is handled by the **Manager** role (see `AGENTS.md` in the repo). You do **not** need to type anything special — the agent loads `agent-kit/prompts/slack_task.md` and `agent-kit/roles/manager.md` and plans first, then delegates. Optionally you can start your message with **"Use agent-kit"** or **"Manager flow"** to remind it.
+
 ---
 
 ## 3. How to verify
