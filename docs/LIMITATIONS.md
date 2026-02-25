@@ -74,3 +74,13 @@ This allows users to:
 
 - **Screenshots:** Now sent inline in the Slack conversation; no workaround needed.
 - **Videos:** Not inline in Slack or chat. The video is in the **artifacts viewer** for the run. Use **"Open in Web"** in the Slack reply → open the run at [cursor.com/agents](https://cursor.com/agents) → open the run’s artifacts viewer to watch the video. This is how Cursor is designed; the agent cannot embed videos in chat.
+
+---
+
+## Possible path: video (or file) in Slack
+
+It may still be possible to get the video into the Slack thread:
+
+1. **Slack MCP** – Slack provides an official [MCP server](https://docs.slack.dev/ai/mcp-server) (send messages, read threads, etc.). **Cursor is listed as a partner client** that can use it. If the Cloud Agent run has access to Slack MCP and the MCP (or a custom wrapper) exposes **“upload file to thread”** (Slack’s [files.getUploadURLExternal](https://api.slack.com/methods/files.getUploadURLExternal) + complete flow), the agent could upload the recorded video to the **same Slack thread** after saving it. Then the video would appear in the thread.
+2. **What’s needed** – Either: (a) Slack MCP adds a file-upload tool and Cursor wires the Cloud Agent to it with the right thread context, or (b) a custom MCP (or Cursor feature) that takes the artifact file from the run and posts it to the originating Slack thread. The agent already has the file at `/opt/cursor/artifacts/`; the missing piece is a **tool the agent can call** to “post this file to the current Slack thread.”
+3. **Next steps** – Check in Cursor Settings → Tools & MCP whether **Slack MCP** can be enabled for Cloud Agents and whether it (or any Slack-related tool) supports file upload. If not, consider a feature request to Cursor: “Allow Cloud Agent to post artifact files (e.g. video) to the Slack thread via Slack MCP or built-in Slack file upload.”
