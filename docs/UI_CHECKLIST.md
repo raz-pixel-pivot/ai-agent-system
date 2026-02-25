@@ -36,6 +36,17 @@ Complete these steps in the **UI** (Cursor + Slack). The repo code already suppo
 
 ---
 
+## 4. Viewing screenshots and videos (Slack tasks)
+
+When the agent completes a task (e.g. screenshot, browser flow), its reply in Slack includes **"Open in Web"** and **"Open in Desktop"**.
+
+- [ ] Click **"Open in Web"** → opens the run at [cursor.com/agents](https://cursor.com/agents).
+- [ ] In the run view you can watch **videos**, view **screenshots**, and read **logs** from the agent’s execution.
+
+Screenshots and videos are not shown inline in Slack; use the run view to see them. Full details: [LIMITATIONS.md](LIMITATIONS.md#how-to-view-artifacts-today-per-cursor-docs).
+
+---
+
 ## Summary
 
 | Where   | What to do |
@@ -43,5 +54,6 @@ Complete these steps in the **UI** (Cursor + Slack). The repo code already suppo
 | Cursor | GitHub Access + Secrets; optional: Runtime, browser MCP |
 | Slack  | Connect Cursor to channel; optional: link to repo |
 | Verify | Text task then (if relevant) browser task |
+| Artifacts | Use "Open in Web" from Slack reply to view videos/screenshots in run view |
 
 After completing the checklist – the repo (roles, prompts, orchestrator) is ready; if you add browser in the UI, the Browser role knows when to use it.

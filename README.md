@@ -2,6 +2,8 @@
 
 **UI setup:** [docs/UI_CHECKLIST.md](docs/UI_CHECKLIST.md) – what to do in Cursor and Slack.
 
+**Viewing screenshots & videos from Slack:** When the agent finishes a task, use **"Open in Web"** in the Slack reply to open the run at [cursor.com/agents](https://cursor.com/agents), where you can see videos, screenshots, and logs. Details: [docs/LIMITATIONS.md](docs/LIMITATIONS.md#how-to-view-artifacts-today-per-cursor-docs).
+
 ## Cloud Agents (Cursor)
 
 **Cloud Agents require a Git folder** (a directory that contains a `.git` repo). This folder is a Git repo.
