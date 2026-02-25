@@ -1,8 +1,10 @@
 # AI Agent System
 
+**הגדרת ממשק (UI):** [docs/UI_CHECKLIST.md](docs/UI_CHECKLIST.md) – מה לעשות ב-Cursor וב-Slack.
+
 ## Cloud Agents (Cursor)
 
-**Cloud Agents דורשים תיקייה של גיט** – כלומר תיקייה שמכילה את התיקייה `.git` (ריפו גיט). בתיקייה הזו יש ריפו גיט.
+**Cloud Agents דורשים תיקייה של גיט.** אם מופיע **GitHub Access Error** – הוראות תיקון: [.cursor/GITHUB_ACCESS.md](.cursor/GITHUB_ACCESS.md). – כלומר תיקייה שמכילה את התיקייה `.git` (ריפו גיט). בתיקייה הזו יש ריפו גיט.
 
 ### איך לפתוח נכון (כדי ש־Cloud Agents יזהה):
 

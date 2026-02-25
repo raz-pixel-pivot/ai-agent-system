@@ -8,6 +8,7 @@ Task from Slack. Apply GLOBAL COST CONTROL.
 4. Handoff (handoff template) to Researcher/QA/Executor as per plan.
 5. Researcher: 1 search max unless approved; 5 bullets; ignore ads; second organic if specified.
 6. QA: pass/fail; screenshot note; short report.
-7. Executor: only after APPROVED; branch agent-exec/<short>; minimal change; PR.
+7. **Browser tasks** (e.g. "open URL", "go to About", "screenshot"): use role browser.md; one flow per task; if browser tool unavailable, offer Playwright script.
+8. Executor: only after APPROVED; branch agent-exec/<short>; minimal change; PR.
 
 Max 6 steps unless approved. No raw logs or HTML dumps.
