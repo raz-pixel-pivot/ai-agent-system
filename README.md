@@ -1,6 +1,6 @@
 # AI Agent System
 
-**Screenshots & videos:** Screenshots can appear inline in Slack. For videos, use **"Open in Web"** in the reply → [cursor.com/agents](https://cursor.com/agents). To post video into the thread: set up **slack-upload** MCP — see [mcp-slack-upload/README.md](mcp-slack-upload/README.md) and [docs/MCP_SERVERS.md](docs/MCP_SERVERS.md).
+**Screenshots & videos:** Screenshots can appear inline in Slack. For videos, use **"Open in Web"** in the reply → [cursor.com/agents](https://cursor.com/agents). To have the agent **post video into the Slack thread**: set up slack-upload MCP and, for tasks triggered from Slack, set the Cloud Agent **install script** so `mcp-slack-upload` gets `npm install` — see [docs/MCP_SERVERS.md](docs/MCP_SERVERS.md#slack-upload-when-the-task-is-from-slack-cloud-agent).
 
 ## Cloud Agents (Cursor)
 

@@ -11,6 +11,8 @@ Task from Slack. Apply GLOBAL COST CONTROL.
 7. **Browser tasks** (e.g. "open URL", "go to About", "screenshot"): use role browser.md; one flow per task; if browser tool unavailable, offer Playwright script.
 8. Executor: only after APPROVED; branch agent-exec/<short>; minimal change; PR.
 
-**Every reply to the user must include** one line listing which agents the task passed through, e.g. `Agents involved: [MANAGER] → [BROWSER]` or `Agents involved: [MANAGER] → [RESEARCHER] → [QA]`. Use role tags in execution order. Place it at the end of the message (or after the main result) so the user always sees the flow.
+**Every reply to the user must include** one line listing which agents the task passed through, e.g. `Agents involved: [MANAGER] → [BROWSER]`. Use role tags in execution order. Place it at the end of the message.
+
+**When the result is a video** and you cannot upload it to Slack: reply in 2–3 short lines. (1) What the video shows. (2) Prefer a **direct link** to the video: `https://cursor.com/agents/{run_id}/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2F{filename}` (use actual run ID and filename so the user can open the video in one click). If you don't have the run ID, say "To watch: click **Open in Web** in this message." Do not paste raw paths or long explanations.
 
 Max 6 steps unless approved. No raw logs or HTML dumps.
