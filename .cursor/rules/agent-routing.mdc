@@ -1,0 +1,14 @@
+---
+description: Routing and skills for AI Agent system tasks
+alwaysApply: true
+---
+
+# Agent routing and skills
+
+In this project, for any task (especially from Slack):
+
+1. **Routing:** Follow `agent-kit/WHEN_TO_USE.md` to decide which role, which skill, which workflow (fast-path vs manager-led), and whether to attach files.
+2. **Skills:** When the current action matches a skill's trigger, load the corresponding file from `agent-kit/skills/` (see `agent-kit/skills/README.md` for the index) and follow its steps.
+3. **When unsure:** If you are not sure what the user expects (outcome, format, or whether to attach files), ask once before proceeding; do not assume.
+
+Main agent instructions remain in `AGENTS.md`.

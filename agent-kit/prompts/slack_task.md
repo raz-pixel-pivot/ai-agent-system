@@ -16,3 +16,5 @@ Task from Slack. Apply GLOBAL COST CONTROL.
 **When the result is a video** and you cannot upload it to Slack: (1) One sentence — what the video shows. (2) **Always** try to include a **direct link**: `https://cursor.com/agents/{run_id}/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2F{filename}` (use the real run_id and the exact filename you saved). If you have no run_id, say "To watch: click **Open in Web**, then open the video in the artifacts list." (3) If you couldn't confirm the file was saved, add: "If the video doesn't appear, the recording may have failed — ask me to try again."
 
 Max 6 steps unless approved. No raw logs or HTML dumps.
+
+**When unsure** what the user expects (deliverable, format, or whether to include screenshots/files), ask once (e.g. "What would you like to receive?") before executing; do not assume.

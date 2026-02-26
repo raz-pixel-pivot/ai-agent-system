@@ -8,6 +8,8 @@ This is a **configuration-only project** — it contains no application source c
 
 ## When you receive a task from Slack
 
+**Routing and behavior:** Follow `agent-kit/WHEN_TO_USE.md` to decide which role, which skill, which workflow (fast-path vs manager-led), and whether to attach files. If you are not sure what the user expects (outcome, format, or whether to attach files), ask once before proceeding; do not assume.
+
 **Choose the appropriate workflow based on task complexity:**
 
 ### Fast-Path Workflow (Recommended for Simple Tasks)
@@ -107,7 +109,8 @@ For detailed workflow and troubleshooting, see: `agent-kit/skills/slack_video_up
 | `agent-kit/roles/*.md` | 5 agent role definitions (manager, qa, browser, executor, researcher) |
 | `agent-kit/templates/*.md` | 4 templates (manager_plan, approval, handoff, task_intake) |
 | `agent-kit/prompts/slack_task.md` | Main prompt for Slack task processing |
-| `agent-kit/skills/*.md` | Skills and workflows (e.g. Slack video upload) |
+| `agent-kit/WHEN_TO_USE.md` | Routing: when to use which role, skill, workflow; when to ask the user |
+| `agent-kit/skills/*.md` | Skills and workflows (e.g. Slack video upload); index in `agent-kit/skills/README.md` |
 | `agent-kit/workflows/*.md` | Workflow definitions (fast_path for simple tasks) |
 | `orchestrator/README.md` | Orchestrator description |
 | `.cursor/mcp.json` | MCP server config (Browser MCP, Slack upload, etc.) |
